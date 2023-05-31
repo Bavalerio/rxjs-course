@@ -1,50 +1,47 @@
-// import { map, reduce, scan } from 'rxjs/operators';
-
 // import { from } from 'rxjs';
+// import { map, reduce, scan } from 'rxjs/operators'
 
-// const numeros = [1,2,3,4,5];
 
-// // const totalAcumulador = (acc, cur) => {
-// //     return acc + cur;
-// // }
-// const totalAcumulador = (acc, cur) => acc + cur;
+// const numbers = [1, 2, 3, 4, 5];
 
-// // Reduce
-// from( numeros ).pipe(
-//     reduce( totalAcumulador, 0 )
-// )
-// .subscribe( console.log );
-
-// // Scan
-// from( numeros ).pipe(
-//     scan( totalAcumulador, 0 )
-// )
-// .subscribe( console.log );
-
-// // Redux
-// interface Usuario {
-//     id?: string;
-//     autenticado?: boolean;
-//     token?: string;
-//     edad?: number;
+// function totalAcc(acc: number, curr: number) {
+//     return acc + curr;
 // }
 
-// const user: Usuario[] = [
-//     { id: 'fher', autenticado: false, token: null },
-//     { id: 'fher', autenticado: true, token: 'ABC' },
-//     { id: 'fher', autenticado: true, token: 'ABC123' },
+// //reduce
+// // from(numbers).pipe(
+// //     reduce(totalAcc, 0)
+// // ).subscribe(console.log);
+
+// //scan
+// from(numbers).pipe(
+//     scan(totalAcc, 0)
+// ).subscribe(console.log);
+
+// //Redux
+// interface UserInterface {
+//     id?: string;
+//     auth?: boolean;
+//     token?: string
+//     age?: number;
+// }
+
+
+// const user: UserInterface[] = [
+//     {id:'bva', auth: false, token: null},
+//     {id:'bva', auth: true, token: 'ABC'},
+//     {id:'bva', auth: false, token: 'ABC123'}
 // ];
 
-// // const state$ = from( user ).pipe(
-// //     scan<Usuario>( (acc, cur) => {
-// //         return { ...acc, ...cur }
-// //     }, { edad: 33 })
-// // );
 
-// // const id$ = state$.pipe(
-// //     map( state => state.id )
-// // );
+// const state$ = from(user).pipe(
+//     scan<UserInterface>((acc, cur) => {
+//         return {...acc, ...cur}
+//     })
+// );
 
-// // id$.subscribe( console.log );
+// const id$ = state$.pipe(
+//     map(state => state)
+// )
 
-
+// id$.subscribe(console.log);
