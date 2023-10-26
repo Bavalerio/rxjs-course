@@ -1,22 +1,19 @@
-import { fromEvent, interval } from 'rxjs';
-import { skip, takeUntil, tap } from 'rxjs/operators';
+import { debounceTime, pluck } from 'rxjs/operators';
 
-const button = document.createElement('button');
-button.innerHTML = 'Stop Timer';
+import { fromEvent } from 'rxjs';
 
-document.querySelector('body').append(button);
+const click$ = fromEvent(document, 'click');
 
-const counter$ = interval(1000);
-const clickBtn$ = fromEvent(button, 'click').pipe(
-    tap(() => console.log('Tap before Skip')),
-    skip(1),
-    tap(() => console.log('Tap after the Skip'))
+click$.pipe(
+    debounceTime(3000)
 );
 
-counter$.pipe(
-    takeUntil(clickBtn$),
-)
-.subscribe({
-    next: val => console.log('next', val),
-    complete: () => console.log('complete')
-});
+const input = document.createElement('input');
+document.querySelector('body').append(input);
+
+const input$ = fromEvent(input, 'keyup');
+
+input$.pipe(
+    debounceTime(1000),
+    pluck('target', 'value')
+).subscribe(console.log);
